@@ -70,15 +70,20 @@ class RadioButtonPage(BasePage):
 
     def click_on_the_radio_button(self, choice):
         choices = {'yes': self.locators.YES_RADIOBUTTON,
-                  'impressive': self.locators.IMPRESSIVE_RADIOBUTTON,
-                  'no': self.locators.NO_RADIOBUTTON}
+                   'impressive': self.locators.IMPRESSIVE_RADIOBUTTON,
+                   'no': self.locators.NO_RADIOBUTTON}
         self.element_is_visible(choices[choice]).click()
 
     def get_output_result(self):
         return self.element_is_present(self.locators.OUTPUT_RESULT).text
 
+
 class WebTablePage(BasePage):
     locators = WebTablePageLocators()
+
+    def __init__(self, driver, url):
+        super().__init__(driver, url)
+        self.check_count_rows = None
 
     def add_new_person(self, count=1):
         count = 1
@@ -115,3 +120,30 @@ class WebTablePage(BasePage):
         delete_button = self.element_is_visible(self.locators.DELETE_BUTTON)
         row = delete_button.find_element("xpath", self.locators.ROW_PARENT)
         return row.text.splitlines()
+
+    def update_person_info(self):
+        person_info = next(generated_person())
+        age = person_info.age
+        self.element_is_visible(self.locators.UPDATE_BUTTON).click()
+        self.element_is_visible(self.locators.AGE_INPUT).clear()
+        self.element_is_visible(self.locators.AGE_INPUT).send_keys(age)
+        self.element_is_visible(self.locators.SUBMIT).click()
+        return str(age)
+
+    def delete_person(self):
+        self.element_is_visible(self.locators.DELETE_BUTTON).click()
+
+    def check_deleted(self):
+        return self.element_is_present(self.locators.NO_ROWS_FOUND).text
+
+    def select_up_to_some_rows(self):
+        count = [5, 10, 20, 25, 50, 100]
+        data = []
+        for x in count:
+            count_row_button = self.element_is_visible(self.locators.COUNT_ROW_LIST)
+            self.go_to_element(count_row_button)
+            count_row_button.click()
+            self.element_is_visible(("css selector", f'option[value="{x}"]')).click()
+            list_rows = self.elements_are_present(self.locators.FULL_PEOPLE_LIST)
+            data.append(len(list_rows))
+        return data
