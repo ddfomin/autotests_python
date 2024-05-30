@@ -3,8 +3,9 @@ import time
 
 from generator.generator import generated_person
 from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonPageLocators, \
-    WebTablePageLocators
+    WebTablePageLocators, ButtonsPageLocators
 from pages.base_page import BasePage
+from selenium.webdriver.common.action_chains import ActionChains
 
 
 class TextBoxPage(BasePage):
@@ -81,10 +82,6 @@ class RadioButtonPage(BasePage):
 class WebTablePage(BasePage):
     locators = WebTablePageLocators()
 
-    def __init__(self, driver, url):
-        super().__init__(driver, url)
-        self.check_count_rows = None
-
     def add_new_person(self, count=1):
         count = 1
         while count != 0:
@@ -147,3 +144,22 @@ class WebTablePage(BasePage):
             list_rows = self.elements_are_present(self.locators.FULL_PEOPLE_LIST)
             data.append(len(list_rows))
         return data
+
+
+class ButtonsPage(BasePage):
+    locators = ButtonsPageLocators()
+
+    def click_on_different_button(self, type_click):
+        if type_click == "double":
+            self.action_double_click(self.element_is_visible(self.locators.DOUBLE_BUTTON))
+            return self.check_clicked_on_the_button(self.locators.DOUBLE_BUTTON_MESSAGE)
+        if type_click == "right":
+            self.action_right_click(self.element_is_visible(self.locators.RIGHT_CLICK_BUTTON))
+            return self.check_clicked_on_the_button(self.locators.RIGHT_CLICK_BUTTON_MESSAGE)
+        if type_click == "click":
+            self.element_is_visible(self.locators.CLICK_ME_BUTTON).click()
+            return self.check_clicked_on_the_button(self.locators.CLICK_ME_BUTTON_MESSAGE)
+
+    def check_clicked_on_the_button(self, element):
+        return self.element_is_present(element).text
+
