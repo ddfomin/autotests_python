@@ -61,6 +61,14 @@ class ButtonsPageLocators:
     RIGHT_CLICK_BUTTON_MESSAGE = ("xpath", "//p[@id='rightClickMessage']")
     CLICK_ME_BUTTON_MESSAGE = ("xpath", "//p[@id='dynamicClickMessage']")
 
+
 class LinksPageLocators:
     SIMPLE_LINK = ("xpath", "//a[@id='simpleLink']")
     BAD_REQUEST = ("xpath", "//a[@id='bad-request']")
+
+
+class UploadAndDownloadLocators:
+    UPLOAD_FILE = ("xpath", "//input[@type='file']")
+    UPLOADED_RESULT = ("xpath", "//p[@id='uploadedFilePath']")
+
+    DOWNLOAD_FILE = ("xpath", "//a[@id='downloadButton']")
