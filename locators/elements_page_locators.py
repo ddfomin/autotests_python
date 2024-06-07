@@ -72,3 +72,9 @@ class UploadAndDownloadLocators:
     UPLOADED_RESULT = ("xpath", "//p[@id='uploadedFilePath']")
 
     DOWNLOAD_FILE = ("xpath", "//a[@id='downloadButton']")
+
+
+class DynamicPropertiesPageLocators:
+    ENABLE_BUTTON = ("xpath", "//button[@id='enableAfter']")
+    COLOR_CHANGE_BUTTON = ("xpath", "//button[@id='colorChange']")
+    VISIBLE_AFTER_BUTTON = ("xpath", "//button[@id='visibleAfter']")
