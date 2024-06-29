@@ -1,4 +1,4 @@
-from pages.alerts_frame_windows_page import BrowserWindowsPage, AlertsPage, FramesPage
+from pages.alerts_frame_windows_page import BrowserWindowsPage, AlertsPage, FramesPage, NestedFramePage
 
 
 class TestAlertsFrameWindows:
@@ -9,7 +9,6 @@ class TestAlertsFrameWindows:
             new_tab_page.open()
             text_result = new_tab_page.check_opened("tab")
             assert text_result == "This is a sample page", "the new tab has not opened or an incorrect tab has opened"
-
 
     class TestAlertsPage:
 
@@ -37,12 +36,21 @@ class TestAlertsFrameWindows:
             text, alert_text = alert_page.check_prompt_alert()
             assert text in alert_text, "Alert did not show up"
 
-        class TestFramesPage:
+    class TestFramesPage:
 
-            def test_frames(self, driver):
-                frame_page = FramesPage(driver, "https://demoqa.com/frames")
-                frame_page.open()
-                result_frame1 = frame_page.check_frame("frame1")
-                result_frame2 = frame_page.check_frame("frame2")
-                assert result_frame1 == ['This is a sample page', '500px', '350px'], "The frame does not exist"
-                assert result_frame2 == ['This is a sample page', '100px', '100px'], "The frame does not exist"
+        def test_frames(self, driver):
+            frame_page = FramesPage(driver, "https://demoqa.com/frames")
+            frame_page.open()
+            result_frame1 = frame_page.check_frame("frame1")
+            result_frame2 = frame_page.check_frame("frame2")
+            assert result_frame1 == ['This is a sample page', '500px', '350px'], "The frame does not exist"
+            assert result_frame2 == ['This is a sample page', '100px', '100px'], "The frame does not exist"
+
+    class TestNestedFramesPage:
+
+        def test_nested_frames(self, driver):
+            nested_frame_page = NestedFramePage(driver, "https://demoqa.com/nestedframes")
+            nested_frame_page.open()
+            parent_text, child_text = nested_frame_page.check_nested_frame()
+            assert parent_text == "Parent frame", "Nested frame does not exist"
+            assert child_text == "Child Iframe", "Nested frame does not exist"
