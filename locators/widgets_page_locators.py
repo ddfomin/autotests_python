@@ -66,3 +66,6 @@ class ToolTipsPageLocators:
     TOOL_TIP_SECTION = ('xpath', '//a[@aria-describedby="sectionToolTip"]')
 
     TOOL_TIPS_INNERS = ('xpath', '//div[@class="tooltip-inner"]')
+
+class MenuPageLocators:
+    MENU_ITEM_LIST = ('xpath', '//ul/li/a')
