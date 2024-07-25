@@ -11,7 +11,7 @@ class AutoCompletePageLocators:
     MULTI_INPUT = ('xpath', '//input[@id="autoCompleteMultipleInput"]')
     MULTI_VALUE = ('xpath', '//div[@class="css-1rhbuit-multiValue auto-complete__multi-value"]')
     MULTI_VALUE_REMOVE = (
-    'xpath', '//div[@class="css-1rhbuit-multiValue auto-complete__multi-value"]//*[local-name() = "path"]')
+        'xpath', '//div[@class="css-1rhbuit-multiValue auto-complete__multi-value"]//*[local-name() = "path"]')
     SINGLE_VALUE = ('xpath', '//div[@class="auto-complete__single-value css-1uccc91-singleValue"]')
     SINGLE_INPUT = ('xpath', '//input[@id="autoCompleteSingleInput"]')
 
@@ -60,12 +60,13 @@ class ToolTipsPageLocators:
     TOOL_TIP_FIELD = ('xpath', '//input[@aria-describedby="textFieldToolTip"]')
 
     CONTRARY_LINK = ('xpath', '//a[text()="Contrary"]')
-    TOOL_TIP_CONTRARY= ('xpath', '//a[@aria-describedby="contraryTexToolTip"]')
+    TOOL_TIP_CONTRARY = ('xpath', '//a[@aria-describedby="contraryTexToolTip"]')
 
     SECTION_LINK = ('xpath', '//a[text()="1.10.32"]')
     TOOL_TIP_SECTION = ('xpath', '//a[@aria-describedby="sectionToolTip"]')
 
     TOOL_TIPS_INNERS = ('xpath', '//div[@class="tooltip-inner"]')
+
 
 class MenuPageLocators:
     MENU_ITEM_LIST = ('xpath', '//ul/li/a')
